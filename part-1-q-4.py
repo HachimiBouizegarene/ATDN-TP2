@@ -13,13 +13,13 @@ gp = GaussianProcessRegressor()
 gp.fit(X, y)
 
 
-def objective(params):
+def f(params):
     humidite, temperature = params
     X_test = np.array([[humidite, temperature]])
     pred = gp.predict(X_test)  
     return -pred.item() 
 
-res = gp_minimize(objective,  
+res = gp_minimize(f,  
                   dimensions=[(50, 90), (15, 35)], 
                   n_calls=20, 
                   random_state=42)
